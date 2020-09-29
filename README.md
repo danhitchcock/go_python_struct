@@ -1,6 +1,6 @@
 # go_python_struct
 
-An example to generate complex structs from Go and return them to Python
+An example to generate complex structs in Go / cgo and return them to Python using CTypes
 
 1. Clone the repo
 
