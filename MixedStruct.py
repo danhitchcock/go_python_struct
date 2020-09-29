@@ -3,7 +3,6 @@ import numpy as np
 from numpy.ctypeslib import ndpointer
 
 GO = CDLL("MixedStruct.so")
-# go build -o MixedStruct.so -buildmode=c-shared MixedStruct.go && python MixedStruct.py
 
 
 class MixedStruct(Structure):
