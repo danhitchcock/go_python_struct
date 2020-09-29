@@ -1,4 +1,4 @@
-from ctypes import c_int, CDLL, Structure, c_void_p, c_double, c_long
+from ctypes import c_int, CDLL, Structure, c_void_p, c_double, c_long, POINTER
 import numpy as np
 from numpy.ctypeslib import ndpointer
 
@@ -10,13 +10,13 @@ class MixedStruct(Structure):
 
 
 GO.GenStruct.argtypes = [c_int]
-GO.GenStruct.restype = c_void_p
+GO.GenStruct.restype = POINTER(MixedStruct)
 
 
 def mixed_struct(x):
-    result = MixedStruct.from_address(GO.GenStruct(x))
-    data = np.frombuffer((c_long * x).from_address(result.data), np.int64)
-    length = result.length
+    result = GO.GenStruct(x)
+    data = np.frombuffer((c_long * x).from_address(result.contents.data), np.int64)
+    length = result.contents.length
     return {"Length": length, "Data": data}
 
 
